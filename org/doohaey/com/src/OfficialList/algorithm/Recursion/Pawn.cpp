@@ -4,7 +4,7 @@
 int fx[9] = {0, -2, -1, 1, 2, 2, 1, -1, -2};
 int fy[9] = {0, -1, -2, -2, -1, 1, 2, 2, 1};
 int n, m, x, y;
-long long dp[25][25];  // change int to long long to avoid overflow
+long long dp[25][25];
 bool a[25][25];
 
 void initialize() {
