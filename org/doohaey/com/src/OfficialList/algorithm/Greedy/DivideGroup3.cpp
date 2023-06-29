@@ -1,42 +1,44 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-#include <algorithm>
-#include <map>
 #include <cstdio>
+#include <map>
+
+std::map<int, int> values;
+typedef std::map<int, int>::iterator itr;
 
 int main() {
-    int n, minLength = INT_MAX;
+    int n;
     scanf("%d", &n);
-    std::vector<int> powerValue(n);
-
+    int minLength = n + 1;
     for (int i = 0; i < n; i++) {
-        scanf("%d", &powerValue[i]);
+        int x;
+        scanf("%d", &x);
+        values[x]++;
     }
 
-    std::sort(powerValue.begin(), powerValue.end());
+    while (!values.empty()) {
+        int sizeOfGroup = 0;
+        itr pre = values.begin(), post = values.begin();
+        --pre->second;
+        ++sizeOfGroup;
 
-    std::map<int, std::vector<int>> endValueToGroup;
-    for (int i = 0; i < n; i++) {
-        int value = powerValue[i];
-        if (endValueToGroup.find(value - 1) != endValueToGroup.end()) {
-            std::vector<int> &group = endValueToGroup[value - 1];
-            group.push_back(value);
-            endValueToGroup.erase(value - 1);
-            endValueToGroup[value] = group;
-        } else {
-            std::vector<int> group = {value};
-            endValueToGroup[value] = group;
+        for (++post; post != values.end() && (pre->first == post->first - 1) && (pre->second < post->second); ++pre, ++post) {
+            --post->second;
+            ++sizeOfGroup;
+        }
+
+        itr i = values.begin();
+        while (i != values.end() && i->second == 0){
+            values.erase(i++->first);
+        }
+
+        if (sizeOfGroup < minLength) {
+            minLength = sizeOfGroup;
         }
     }
 
-    for (std::map<int, std::vector<int>>::iterator it = endValueToGroup.begin(); it != endValueToGroup.end(); ++it) {
-        int size = it->second.size();
-        if (size < minLength) {
-            minLength = size;
-        }
-    }
+    printf("%d", minLength);
 
-    printf("%d\n", minLength);
+    return 0;
 }
+
+
 
