@@ -16,9 +16,13 @@ inline bool check(int _idx){
         } else {
             countStart = pos[i];
         }
+
+        if (signpost_newly_set > signpost_to_set){
+            return false;
+        }
     }
 
-    return signpost_newly_set <= signpost_to_set;
+    return true;
 }
 
 void dichotomy(){
