@@ -9,6 +9,12 @@ LuoGu.iml
 
 org/doohaey/com/.idea
 
+org/doohaey/com/src/
+*.idea/
+*com.iml
+*out/
+
+
 # macOS
 
 .DS_Store
