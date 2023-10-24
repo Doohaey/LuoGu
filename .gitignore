@@ -1,2 +1,16 @@
+# idea
+
+.idea/
+*.iml
+*.ipr
+*.iws
+
+LuoGu.iml
+
+# macOS
 
 .DS_Store
+
+# compiler
+
+out/
